@@ -21,9 +21,7 @@ OBJCOPY := avr-objcopy
 
 # Main source
 SOURCE_MAIN = \
-  games/games.cpp \
-  tgbtest.cpp \
-  chip8.cpp
+  nightlight.c
 
 # USB driver source
 SOURCE_USB = \
@@ -36,14 +34,14 @@ SOURCE_USB = \
 
 # Full source and objects
 SOURCES = $(SOURCE_USB) $(SOURCE_MAIN)
-OBJECTS = $(patsubst %.c,%.o,$(SOURCES)) $(patsubst %.S,%.o,$(SOURCES))
+OBJECTS = $(filter-out $(SOURCES), $(patsubst %.c,%.o,$(SOURCES)) $(patsubst %.S,%.o,$(SOURCES)))
 
 .PHONY: all clean
 
 all: $(TARGET).hex
 
 clean:
-	@rm -f $(OBJECTS) $(TARGET).hex $(TARGET).elf
+	rm -f $(OBJECTS) $(TARGET).hex $(TARGET).elf
 
 $(TARGET).elf: $(OBJECTS)
 	@echo Linking
