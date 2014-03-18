@@ -54,11 +54,15 @@ void TxTimedByte(uint8_t data, uint8_t delay);
  */
 uint8_t RxTimedByte(uint8_t start, uint8_t delay);
 
+/** Initialise the UART hardware
+ */
+void uartInit();
+
 /** Send a packet
  *
  * @param data the 16 bit value to send.
  */
-void sendPacket(uint16_t data);
+void uartSend(uint16_t data);
 
 /** Receive a packet
  *
@@ -66,7 +70,7 @@ void sendPacket(uint16_t data);
  *
  * @return true if a valid packet was received, false otherwise.
  */
-bool recvPacket(uint16_t *pData);
+bool uartRecv(uint16_t *pData);
 
 #ifdef __cplusplus
 }

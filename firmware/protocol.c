@@ -19,11 +19,41 @@
  */
 #define RxByte() RxTimedByte((RXDELAY*1.5)-2.5, RXDELAY)
 
+//---------------------------------------------------------------------------
+// Helper functions
+//---------------------------------------------------------------------------
+
+/** Calculate the checksum for a 16 bit value.
+ *
+ * This function calculates a 4 bit checksum from the four 4 bit nybbles in
+ * the data word.
+ *
+ * @param data the data to calculate the checksum for
+ *
+ * @return the checksum value (in the lowest 4 bits)
+ */
+static uint8_t checksum(uint16_t data) {
+  int shift = 12;
+  uint8_t sum = 0;
+  for(int i=0; i<4; i++, shift-=4)
+    sum = (sum + ((data >> shift) & 0x000f)) & 0x0f;
+  return sum;
+  }
+
+//---------------------------------------------------------------------------
+// Public API
+//---------------------------------------------------------------------------
+
+/** Initialise the UART hardware
+ */
+void uartInit() {
+  }
+
 /** Send a packet
  *
  * @param data the 16 bit value to send.
  */
-void sendPacket(uint16_t data) {
+void uartSend(uint16_t data) {
   }
 
 /** Receive a packet
@@ -32,6 +62,6 @@ void sendPacket(uint16_t data) {
  *
  * @return true if a valid packet was received, false otherwise.
  */
-bool recvPacket(uint16_t *pData) {
+bool uartRecv(uint16_t *pData) {
   return false;
   }
