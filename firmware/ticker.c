@@ -16,7 +16,7 @@
 //---------------------------------------------------------------------------
 
 // The global tick count
-static uint16_t g_ticks = 0;
+static volatile uint16_t g_ticks = 0;
 
 /** Interrupt handler for timer 1
  */
@@ -30,7 +30,7 @@ ISR(TIMER1_COMPA_vect) {
 
 /** Initialise the tick counter
  */
-void initTicks() {
+void tickInit() {
   cli();
   TCCR1 = 0x8F; // Set prescaler to 16384
   GTCCR = 0x00;
@@ -45,7 +45,7 @@ void initTicks() {
  *
  * @return the current tick counter value.
  */
-uint16_t getTicks() {
+uint16_t ticks() {
   return g_ticks;
   }
 
@@ -59,7 +59,10 @@ uint16_t getTicks() {
  *
  * @return the number of elapsed ticks.
  */
-uint16_t elapsedTime(uint16_t ticks) {
-  return 0;
+uint16_t tickElapsed(uint16_t ticks) {
+  uint16_t now = g_ticks;
+  if(now<ticks)
+    return (MAX_TICKS - ticks) + now;
+  return now - ticks;
   }
 

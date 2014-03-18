@@ -12,13 +12,13 @@
 
 /** Initialise the tick counter
  */
-void initTicks();
+void tickInit();
 
 /** Get the current tick count
  *
  * @return the current tick counter value.
  */
-uint16_t getTicks();
+uint16_t ticks();
 
 /** Calculate the duration between now and a previously managed tick count.
  *
@@ -30,7 +30,7 @@ uint16_t getTicks();
  *
  * @return the number of elapsed ticks (0 if out of range)
  */
-uint16_t elapsedTime(uint16_t ticks);
+uint16_t tickElapsed(uint16_t ticks);
 
 #endif /* __TICKER_H */
 
