@@ -14,6 +14,7 @@ FUSE_EXT  = 01
 
 # Define tools and options
 TARGET  := nightlight
+SIZE    := avr-size
 CXX     := avr-gcc
 CFLAGS  := -std=c99 -Wall -Os -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 LDFLAGS := -mmcu=$(MCU)
@@ -39,6 +40,7 @@ clean:
 $(TARGET).elf: $(OBJECTS)
 	@echo Linking
 	@$(CXX) $(LDFLAGS) -o $@ $(OBJECTS)
+	@$(SIZE) $@
 
 $(TARGET).hex: $(TARGET).elf
 	@echo Creating Hex File
