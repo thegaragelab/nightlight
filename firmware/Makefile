@@ -23,6 +23,7 @@ OBJCOPY := avr-objcopy
 SOURCES = \
   nightlight.c \
   protocol.c \
+  ticker.c \
   softuart.S
 
 # Derive object file names
