@@ -20,20 +20,11 @@ LDFLAGS := -mmcu=$(MCU)
 OBJCOPY := avr-objcopy
 
 # Main source
-SOURCE_MAIN = \
-  nightlight.c
+SOURCES = \
+  nightlight.c \
+  softuart.S
 
-# USB driver source
-SOURCE_USB = \
-  usbdrv/oddebug.c \
-  usbdrv/usbdrvasm.S \
-  usbdrv/usbdrv.c
-
-# Don't treat USB source as intermediates (we don't want them deleted)
-.SECONDARY: $(SOURCE_USB)
-
-# Full source and objects
-SOURCES = $(SOURCE_USB) $(SOURCE_MAIN)
+# Derive object file names
 OBJECTS = $(filter-out $(SOURCES), $(patsubst %.c,%.o,$(SOURCES)) $(patsubst %.S,%.o,$(SOURCES)))
 
 .PHONY: all clean
@@ -41,7 +32,7 @@ OBJECTS = $(filter-out $(SOURCES), $(patsubst %.c,%.o,$(SOURCES)) $(patsubst %.S
 all: $(TARGET).hex
 
 clean:
-	rm -f $(OBJECTS) $(TARGET).hex $(TARGET).elf
+	@rm -f $(OBJECTS) $(TARGET).hex $(TARGET).elf
 
 $(TARGET).elf: $(OBJECTS)
 	@echo Linking
@@ -58,4 +49,4 @@ $(TARGET).hex: $(TARGET).elf
 
 %.o: %.S
 	@echo Assembling $<
-	@$(CXX) -c $< -o $@
+	@$(CXX) $(CFLAGS) -c $< -o $@
