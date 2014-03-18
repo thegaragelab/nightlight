@@ -6,7 +6,7 @@
 #ifndef __SOFTUART_H
 #define __SOFTUART_H
 
-#define BAUD_RATE 115200
+#include "uartconf.h"
 
 #ifdef F_CPU
   /* account for integer truncation by adding 3/2 = 1.5 */
