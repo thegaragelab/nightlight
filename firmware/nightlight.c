@@ -10,9 +10,10 @@
 
 /** Program entry point
  */
-void main() {
+int main() {
   // TODO: Initialise IO pins
   // Enter main loop
   while(true);
+  return 0;
   }
 
