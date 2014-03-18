@@ -16,4 +16,7 @@
 #define UART_PORT PORTB
 #define UART_PIN  PINB5
 
+/** Character to use for read timeout */
+#define BAD_CHAR 0xFF
+
 #endif /* __UARTCONF_H */

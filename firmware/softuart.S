@@ -9,8 +9,6 @@
 #define startWait  r19
 #define delayCount r18
 
-#define BAD_CHAR 0xFF
-
 #include <avr/io.h>
 #include "uartconf.h"
 ; correct for avr/io.h 0x20 port offset for io instructions
