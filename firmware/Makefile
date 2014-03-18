@@ -15,7 +15,7 @@ FUSE_EXT  = 01
 # Define tools and options
 TARGET  := nightlight
 CXX     := avr-gcc
-CFLAGS  := -Wall -Os -mmcu=$(MCU) -DF_CPU=$(F_CPU)
+CFLAGS  := -std=c99 -Wall -Os -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 LDFLAGS := -mmcu=$(MCU)
 OBJCOPY := avr-objcopy
 
