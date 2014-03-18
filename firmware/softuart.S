@@ -6,7 +6,11 @@
  * @version: $Id$
  */
 
+#define startWait  r19
 #define delayCount r18
+
+#define BAD_CHAR 0xFF
+
 #include <avr/io.h>
 #include "uartconf.h"
 ; correct for avr/io.h 0x20 port offset for io instructions
@@ -53,8 +57,11 @@ RxTimedByte:
         sbi UART_PORTX, UART_PIN  	; enable pullup
 #endif
         mov delayCount, r24		; 1.5 bit delay
+        mov startWait, r24
         ldi r24, 0x80 			; bit shift counter
 WaitStart:
+        dec  startWait
+        breq NoData
         sbic UART_PORTX-2, UART_PIN 	; wait for start edge
         rjmp WaitStart
         cli
@@ -72,4 +79,7 @@ StopBit:
         dec delayCount
         brne StopBit
         reti				; return and enable interrupts
+NoData:
+        ldi r24, BAD_CHAR
+        reti
 
