@@ -57,7 +57,7 @@ RxTimedByte:
         sbi UART_PORTX, UART_PIN  	; enable pullup
 #endif
         mov delayCount, r24		; 1.5 bit delay
-        mov startWait, r24
+        ldi startWait, 0xff             ; Around 5 bits @ 57.6KBaud
         ldi r24, 0x80 			; bit shift counter
 WaitStart:
         dec  startWait
