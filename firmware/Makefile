@@ -22,6 +22,7 @@ OBJCOPY := avr-objcopy
 # Main source
 SOURCES = \
   nightlight.c \
+  protocol.c \
   softuart.S
 
 # Derive object file names
