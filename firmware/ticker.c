@@ -3,7 +3,8 @@
 *----------------------------------------------------------------------------*
 * 18-Mar-2014 ShaneG
 *
-* This implements a simple tick counter for timing purposes.
+* This implements a simple tick counter for timing purposes. This code uses
+* timer 1 on the ATtiny to generate the interrupts.
 *---------------------------------------------------------------------------*/
 #include <stdint.h>
 #include <stdbool.h>
