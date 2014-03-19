@@ -22,20 +22,8 @@ extern "C" {
 #endif
 
 //---------------------------------------------------------------------------
-// Speed constants and low level communications routines
+// Low level communications routines
 //---------------------------------------------------------------------------
-
-#ifdef F_CPU
-  /* account for integer truncation by adding 3/2 = 1.5 */
-  #define TXDELAY (((F_CPU/BAUD_RATE)-7 +1.5)/3)
-  #define RXDELAY (((F_CPU/BAUD_RATE)-5 +1.5)/3)
-  #define RXROUNDED (((F_CPU/BAUD_RATE)-5 +2)/3)
-  #if RXROUNDED > 127
-    #error low baud rates unsupported - use higher BAUD_RATE
-  #endif
-#else
-  #error CPU frequency F_CPU undefined
-#endif
 
 /** Send a single byte
  *
@@ -53,6 +41,10 @@ void TxTimedByte(uint8_t data, uint8_t delay);
  *         out.
  */
 uint8_t RxTimedByte(uint8_t start, uint8_t delay);
+
+//---------------------------------------------------------------------------
+// Protocol level operations
+//---------------------------------------------------------------------------
 
 /** Initialise the UART hardware
  */
