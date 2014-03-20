@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <avr/io.h>
+#include "nightlight.h"
 #include "softuart.h"
 #include "ticker.h"
 
@@ -41,7 +42,8 @@ static void ledState(bool state) {
  */
 int main() {
   uint16_t now;
-  // Initialise IO pins libraries
+  // Initialise libraries
+  configInit();
   ledInit();
   tickInit();
   uartInit();

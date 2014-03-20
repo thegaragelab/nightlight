@@ -25,6 +25,7 @@ SOURCES = \
   nightlight.c \
   protocol.c \
   ticker.c \
+  sysconfig.c \
   softuart.S
 
 # Derive object file names
