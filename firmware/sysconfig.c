@@ -64,9 +64,9 @@ static uint8_t eepromRead(uint8_t address) {
  * @return the calculated checksum
  */
 static uint8_t checksum() {
-  uint8_t result = 0;
+  uint8_t result = 0x55; // Seed value
   for(uint8_t index=1; index<CONFIG_MAX; index++)
-    result += g_sysinfo[index];
+    result ^= g_sysinfo[index];
   return result;
   }
 
