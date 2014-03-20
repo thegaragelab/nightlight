@@ -8,9 +8,9 @@
 # CPU specific options
 MCU       = attiny85
 F_CPU     = 8000000
-FUSE_LOW  = E2
-FUSE_HIGH = DF
-FUSE_EXT  = 01
+FUSE_LOW  = 0xE2
+FUSE_HIGH = 0xDF
+FUSE_EXT  = 0xFF
 
 # Define tools and options
 TARGET  := nightlight
@@ -19,6 +19,7 @@ CXX     := avr-gcc
 CFLAGS  := -std=c99 -Wall -Os -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 LDFLAGS := -mmcu=$(MCU)
 OBJCOPY := avr-objcopy
+AVRDUDE := avrdude
 
 # Main source
 SOURCES = \
@@ -37,6 +38,9 @@ all: $(TARGET).hex
 
 clean:
 	@rm -f $(OBJECTS) $(TARGET).hex $(TARGET).elf
+
+flash: $(TARGET).hex
+	@$(AVRDUDE) -c usbasp -p t85 -U flash:w:$(TARGET).hex -u -D -U lfuse:w:$(FUSE_LOW):m -U hfuse:w:$(FUSE_HIGH):m -U efuse:w:$(FUSE_EXT):m
 
 $(TARGET).elf: $(OBJECTS)
 	@echo Linking
