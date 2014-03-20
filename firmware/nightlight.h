@@ -28,6 +28,7 @@ typedef enum {
   CONFIG_TRIGGER,         //! Trigger value for sensing
   CONFIG_LIGHT_START,     //! Starting PWM value for turning on light
   CONFIG_LIGHT_STEP,      //! Step value for turning on/off light
+  CONFIG_LIGHT_ON,        //! Time to keep the light on (in seconds)
   CONFIG_LOW_POWER,       //! Low power detection level
   CONFIG_LED_ON,          //! Duration (in 1/10th sec) to keep LED on
   CONFIG_LED_OFF,         //! Duration (in 1/10th sec) to keep LED off
@@ -43,7 +44,7 @@ typedef enum {
 typedef enum {
   STATE_POWER = CONFIG_MAX, //! Current battery power reading
   STATE_COUNT,              //! Low power count (used for filtering)
-  STATE_SENSE,              //! Current location/brightness reading
+  STATE_MOTION,             //! Current location/brightness reading
   STATE_MAX                 //! Maximum state value
   } STATE;
 
