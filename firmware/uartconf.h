@@ -14,7 +14,7 @@
 
 /** Define the hardware port and pin */
 #define UART_PORT PORTB
-#define UART_PIN  PINB5
+#define UART_PIN  PINB2
 
 /** Character to use for read timeout */
 #define BAD_CHAR 0xFF
