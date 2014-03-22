@@ -45,7 +45,7 @@ flash: $(TARGET).hex
 $(TARGET).elf: $(OBJECTS)
 	@echo Linking
 	@$(CXX) $(LDFLAGS) -o $@ $(OBJECTS)
-	@$(SIZE) $@
+	@$(SIZE) --mcu=$(MCU) --format=avr $@
 
 $(TARGET).hex: $(TARGET).elf
 	@echo Creating Hex File
