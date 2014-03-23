@@ -104,9 +104,9 @@ static int fromHex(uint8_t hex) {
   if((hex>='0')&&(hex<='9'))
     return (int)(hex - '0');
   if((hex>='a')&&(hex<='f'))
-    return (int)(hex - 'a');
+    return (int)(hex - 'a' + 10);
   if((hex>='A')&&(hex<='F'))
-    return (int)(hex - 'A');
+    return (int)(hex - 'A' + 10);
   // Bad hex digit
   return -1;
   }
@@ -118,6 +118,9 @@ static int fromHex(uint8_t hex) {
 /** Initialise the UART hardware
  */
 void uartInit() {
+  // Initialise the UART pin as output and put in idle (high) state
+  PORTB |= (1 << UART_PIN);
+  DDRB |= (1 << UART_PIN);
   }
 
 /** Send a packet
@@ -125,6 +128,9 @@ void uartInit() {
  * @param data the 16 bit value to send.
  */
 void uartSend(uint16_t data) {
+  // Put the pin in idle state
+  PORTB |= (1 << UART_PIN);
+  // Start transmitting
   TxByte(CHAR_START);
   for(int i=0; i<4; i++)
     TxByte(toHex((data >> ((3 - i) * 4))));
