@@ -40,7 +40,10 @@ clean:
 	@rm -f $(OBJECTS) $(TARGET).hex $(TARGET).elf
 
 flash: $(TARGET).hex
-	@$(AVRDUDE) -c usbasp -p t85 -U flash:w:$(TARGET).hex -u -D -U lfuse:w:$(FUSE_LOW):m -U hfuse:w:$(FUSE_HIGH):m -U efuse:w:$(FUSE_EXT):m
+	@$(AVRDUDE) -c usbasp -p t85 -U flash:w:$(TARGET).hex -u
+
+fuses:
+	@$(AVRDUDE) -c usbasp -p t85 -u -U lfuse:w:$(FUSE_LOW):m -U hfuse:w:$(FUSE_HIGH):m -U efuse:w:$(FUSE_EXT):m
 
 $(TARGET).elf: $(OBJECTS)
 	@echo Linking
