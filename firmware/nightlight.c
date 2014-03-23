@@ -101,8 +101,7 @@ int main() {
     configWrite(STATE_MOTION, adcMotion());
     while(tickElapsed(now)<10);
     ledState(false);
-    now = ticks();
-    while(tickElapsed(now)<10);
+    while(tickElapsed(now)<20);
     ledState(true);
     }
   return 0;
