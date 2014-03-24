@@ -63,7 +63,7 @@ uint16_t ticks() {
  *
  * @return the number of elapsed ticks
  */
-uint16_t tickElapsed(uint16_t ticks) {
+uint16_t ticksElapsed(uint16_t ticks) {
   uint16_t now = g_ticks;
   if(now<ticks)
     return (MAX_TICKS - ticks) + now;

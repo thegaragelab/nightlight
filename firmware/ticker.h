@@ -36,7 +36,7 @@ uint16_t seconds();
  *
  * @return the number of elapsed ticks
  */
-uint16_t tickElapsed(uint16_t ticks);
+uint16_t ticksElapsed(uint16_t ticks);
 
 /** Calculate the duration between now and a previously saved seconds count.
  *
