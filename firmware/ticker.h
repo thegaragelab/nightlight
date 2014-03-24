@@ -20,7 +20,13 @@ void tickInit();
  */
 uint16_t ticks();
 
-/** Calculate the duration between now and a previously managed tick count.
+/** Get the current time in seconds
+ *
+ * @return the current time in seconds
+ */
+uint16_t seconds();
+
+/** Calculate the duration between now and a previously saved tick count.
  *
  * This function returns the amount of elapsed time (in ticks) since the
  * measured value. The maximum allowed time is 65535 ticks (about 1 hour and
@@ -28,9 +34,21 @@ uint16_t ticks();
  *
  * @param ticks the tick sample to test against.
  *
- * @return the number of elapsed ticks (0 if out of range)
+ * @return the number of elapsed ticks
  */
 uint16_t tickElapsed(uint16_t ticks);
+
+/** Calculate the duration between now and a previously saved seconds count.
+ *
+ * This function returns the amount of elapsed time (in seconds) since the
+ * measured value. The maximum allowed time is 65535 seconds (a little over
+ * 18 hourse).
+ *
+ * @param seconds the time sample to test against.
+ *
+ * @return the number of elapsed seconds
+ */
+uint16_t secondsElapsed(uint16_t seconds);
 
 #endif /* __TICKER_H */
 
