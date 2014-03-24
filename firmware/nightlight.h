@@ -7,8 +7,8 @@
 * configuration values are backed by the EEPROM and will persist during
 * power cycles.
 *--------------------------------------------------------------------------*/
-#ifndef __SYSCONFIG_H
-#define __SYSCONFIG_H
+#ifndef __NIGHTLIGHT_H
+#define __NIGHTLIGHT_H
 
 /** Firmware version
  *
@@ -78,5 +78,5 @@ void configWrite(uint8_t index, uint8_t value);
  */
 void configSave();
 
-#endif /* __SYSCONFIG_H */
+#endif /* __NIGHTLIGHT_H */
 
