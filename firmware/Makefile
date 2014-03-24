@@ -27,6 +27,7 @@ SOURCES = \
   protocol.c \
   ticker.c \
   digital.c \
+  analog.c \
   sysconfig.c \
   softuart.S
 
