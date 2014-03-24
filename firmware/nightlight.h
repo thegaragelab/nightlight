@@ -26,10 +26,10 @@
 typedef enum {
   CONFIG_FIRMWARE    = 0, //! Firmware version (read only)
   CONFIG_TRIGGER,         //! Trigger value for sensing
+  CONFIG_LOW_POWER,       //! Low power detection level
+  CONFIG_LIGHT_ON,        //! Time to keep the light on (in seconds)
   CONFIG_LIGHT_START,     //! Starting PWM value for turning on light
   CONFIG_LIGHT_STEP,      //! Step value for turning on/off light
-  CONFIG_LIGHT_ON,        //! Time to keep the light on (in seconds)
-  CONFIG_LOW_POWER,       //! Low power detection level
   CONFIG_LED_ON,          //! Duration (in 1/10th sec) to keep LED on
   CONFIG_LED_OFF,         //! Duration (in 1/10th sec) to keep LED off
   CONFIG_LED_ON_LOW,      //! Duration (in 1/10th sec) to keep LED on (LP)
@@ -43,8 +43,8 @@ typedef enum {
  */
 typedef enum {
   STATE_POWER = CONFIG_MAX, //! Current battery power reading
-  STATE_COUNT,              //! Low power count (used for filtering)
   STATE_MOTION,             //! Current location/brightness reading
+  STATE_LIGHT,              //! Seconds remaining for light
   STATE_MAX                 //! Maximum state value
   } STATE;
 
