@@ -80,8 +80,31 @@ static uint8_t adcRead(uint8_t channel) {
 #define adcMotion() adcRead(CHAN_MOTION)
 
 //---------------------------------------------------------------------------
-// Command processing
+// Helper functions
 //---------------------------------------------------------------------------
+
+/** Base value for full voltage
+ *
+ * This is the value expected for a fully charged 6V battery pack.
+ */
+#define BASE_LEVEL 0xE8
+
+/** Read the analog inputs
+ *
+ * This function reads the analog inputs (battery voltage and motion sensor).
+ * Because the PIR and LDR are being driven directly from the batter we adjust
+ * that input to the current battery voltage (so readings remain consistant).
+ */
+static void readSensors() {
+  // Update sensor values
+  configWrite(STATE_POWER, adcVoltage());
+  configWrite(STATE_MOTION, adcMotion());
+  // Adjust motion sensor value match battery level
+  if(configRead(STATE_POWER)<BASE_LEVEL) {
+    uint8_t delta = BASE_LEVEL - configRead(STATE_POWER);
+    configWrite(STATE_MOTION, configRead(STATE_MOTION) + delta);
+    }
+  }
 
 /** Mask to extract command verb */
 #define MASK_COMMAND 0xF000
@@ -146,8 +169,7 @@ int main() {
   // Enter main loop
   while(true) {
     // Update sensor values
-    configWrite(STATE_POWER, adcVoltage());
-    configWrite(STATE_MOTION, adcMotion());
+    readSensors();
     // Check for any commands and respond to them
     if(uartRecv(&command))
       uartSend(processCommand(command));
