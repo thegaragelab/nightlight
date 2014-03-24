@@ -26,7 +26,7 @@ SOURCES = \
   nightlight.c \
   protocol.c \
   ticker.c \
-  pwm.c \
+  digital.c \
   sysconfig.c \
   softuart.S
 

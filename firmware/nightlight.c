@@ -9,31 +9,7 @@
 #include "nightlight.h"
 #include "softuart.h"
 #include "ticker.h"
-#include "pwm.h"
-
-//---------------------------------------------------------------------------
-// Status LED control
-//---------------------------------------------------------------------------
-
-#define LED_PIN PINB1
-
-/** Initialise the LED
- */
-static void ledInit() {
-  PORTB |= (1 << LED_PIN);
-  DDRB |= (1 << LED_PIN);
-  }
-
-/** Change the LED state
- *
- * @param state true if the LED should be on, false if not
- */
-static void ledState(bool state) {
-  if(state)
-    PORTB |= (1 << LED_PIN);
-  else
-    PORTB &= ~(1 << LED_PIN);
-  }
+#include "digital.h"
 
 //---------------------------------------------------------------------------
 // ADC Sampling
