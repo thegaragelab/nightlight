@@ -131,7 +131,8 @@ static uint16_t processCommand(uint16_t command) {
 /** Program entry point
  */
 int main() {
-  uint16_t now, command;
+  uint16_t led_changed, light_changed, command;
+  bool led_on = true;
   // Initialise libraries
   configInit();
   adcInit();
@@ -139,22 +140,59 @@ int main() {
   pwmInit();
   tickInit();
   uartInit();
+  // Initialise values
+  led_changed = 0;
+  light_changed = 0;
   // Enter main loop
   while(true) {
-    // Get current time stamp
-    now = ticks();
     // Update sensor values
     configWrite(STATE_POWER, adcVoltage());
     configWrite(STATE_MOTION, adcMotion());
     // Check for any commands and respond to them
     if(uartRecv(&command))
       uartSend(processCommand(command));
-    // Evaluate the current state
-
-    while(tickElapsed(now)<10);
-    ledState(false);
-    while(tickElapsed(now)<20);
-    ledState(true);
+    // Update light state
+    if(configRead(STATE_MOTION) >= configRead(CONFIG_TRIGGER)) {
+      configWrite(STATE_LIGHT, configRead(CONFIG_LIGHT_ON));
+      light_changed = seconds();
+      }
+    else {
+      uint16_t remaining = secondsElapsed(light_changed);
+      if(remaining>configRead(STATE_LIGHT))
+        configWrite(STATE_LIGHT, 0);
+      else
+        configWrite(STATE_LIGHT, configRead(STATE_LIGHT) - remaining);
+      }
+    // Update LED state
+    if(configRead(STATE_POWER) <= configRead(CONFIG_LOW_POWER)) {
+      // Use low power values
+      if(led_on&&(ticksElapsed(led_changed)>=configRead(CONFIG_LED_ON_LOW))) {
+        led_on = false;
+        led_changed = ticks();
+        }
+      else if((!led_on)&&(ticksElapsed(led_changed)>=configRead(CONFIG_LED_OFF_LOW))) {
+        led_on = true;
+        led_changed = ticks();
+        }
+      }
+    else {
+      // Use normal power levels
+      if(led_on&&(ticksElapsed(led_changed)>=configRead(CONFIG_LED_ON))) {
+        led_on = false;
+        led_changed = ticks();
+        }
+      else if((!led_on)&&(ticksElapsed(led_changed)>=configRead(CONFIG_LED_OFF))) {
+        led_on = true;
+        led_changed = ticks();
+        }
+      }
+    // Now update the hardware outputs
+    if(configRead(STATE_LIGHT)>0) {
+      pwmOut(255);
+      ledState(false); // Don't turn on led if light is on
+      }
+    else
+      ledState(led_on);
     }
   return 0;
   }
