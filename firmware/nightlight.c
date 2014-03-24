@@ -9,6 +9,7 @@
 #include "nightlight.h"
 #include "softuart.h"
 #include "ticker.h"
+#include "pwm.h"
 
 //---------------------------------------------------------------------------
 // Status LED control
@@ -90,6 +91,7 @@ int main() {
   configInit();
   adcInit();
   ledInit();
+  pwmInit();
   tickInit();
   uartInit();
   // Enter main loop
