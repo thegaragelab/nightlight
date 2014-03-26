@@ -29,14 +29,16 @@
  * that input to the current battery voltage (so readings remain consistant).
  */
 static void readSensors() {
+  uint8_t power = adcVoltage();
+  uint8_t motion = adcMotion();
+  // Adjust motion value according to current power level
+  if(power<BASE_LEVEL)
+    motion = motion + (BASE_LEVEL - power);
+  else if(power>BASE_LEVEL)
+    motion = motion - (power - BASE_LEVEL);
   // Update sensor values
-  configWrite(STATE_POWER, adcVoltage());
-  configWrite(STATE_MOTION, adcMotion());
-  // Adjust motion sensor value match battery level
-  if(configRead(STATE_POWER)<BASE_LEVEL) {
-    uint8_t delta = BASE_LEVEL - configRead(STATE_POWER);
-    configWrite(STATE_MOTION, configRead(STATE_MOTION) + delta);
-    }
+  configWrite(STATE_POWER, power);
+  configWrite(STATE_MOTION, motion);
   }
 
 /** Mask to extract command verb */
@@ -53,7 +55,6 @@ typedef enum {
   STATUS_ERR = 0xFFFF, //! The 'ERR' state
   };
 
-/** The 'GET' verb - used to
 /** Process an incoming command
  *
  * @param command the incoming command to process
