@@ -12,7 +12,7 @@
 #define LED_PIN PINB1
 
 /** Pin driving the PWM light output */
-#define PWM_PIN PINB4
+#define PWM_PIN PINB0
 
 /** Initialise the LED output
  */
