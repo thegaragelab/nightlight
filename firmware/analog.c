@@ -13,6 +13,9 @@
 /** Channel mask */
 #define CHAN_MASK ((1 << MUX3) | (1 << MUX2) | (1 << MUX1) | (1 << MUX0))
 
+/** Number of samples to average */
+#define SAMPLE_COUNT 3
+
 /** Initialise the ADC channels
  */
 void adcInit() {
@@ -26,15 +29,19 @@ void adcInit() {
  * @return the current reading of the voltage monitoring ADC
  */
 uint8_t adcRead(uint8_t channel) {
-  // Select the channel and start the sampling
+  uint16_t total = 0;
+  // Select the channel
   ADMUX = (ADMUX & ~CHAN_MASK) | channel;
-  ADCSRA |= (1 << ADSC);
-  // Wait for the sample to complete
-  while(!(ADCSRA&(1 << ADIF)));
-  // Grab the result and clear the completion flag
-  uint8_t result = ADCH;
-  ADCSRA |= (1 << ADIF);
+  // Take samples and sum them
+  for(uint8_t i=0; i<SAMPLE_COUNT; i++) {
+    ADCSRA |= (1 << ADSC);
+    // Wait for the sample to complete
+    while(!(ADCSRA&(1 << ADIF)));
+    // Grab the result and clear the completion flag
+    total = total + ADCH;
+    ADCSRA |= (1 << ADIF);
+    }
   // All done
-  return result;
+  return (uint8_t)((total / SAMPLE_COUNT) & 0x00FF);
   }
 
