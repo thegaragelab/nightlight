@@ -53,7 +53,7 @@ typedef enum {
   STATUS_OK  = 0x0000, //! The 'OK' state
   STATUS_INF = 0x1000, //! 'OK' state with information
   STATUS_ERR = 0xFFFF, //! The 'ERR' state
-  };
+  } PROTOCOL_VALUES;
 
 /** Process an incoming command
  *
