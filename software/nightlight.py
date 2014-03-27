@@ -15,6 +15,7 @@ CHAR_START    = '!'
 CHAR_END      = '\n'
 BODY_LENGTH   = 5
 PACKET_LENGTH = BODY_LENGTH + 2
+RETRY_COUNT   = 3
 
 # Configuration entries
 CONFIG_FIRMWARE    = 0
@@ -67,7 +68,8 @@ class NightLight:
     if self.serial is None:
       raise Exception("Attempting to send on an unopen port")
     # Retry until we get a response
-    while True:
+    retries = RETRY_COUNT
+    while retries <> 0:
       packet = "%c%04X%1X%c" % (
         CHAR_START,
         value,
@@ -82,8 +84,11 @@ class NightLight:
       if len(response) == PACKET_LENGTH:
         value = int(response[1:5], 16)
         return value
-      else:
-        sleep(0.1)
+      # Wait and try again
+      sleep(0.1)
+      retries = retries - 1
+    # Failed, raise an exception
+    raise Exception("No response from device.")
 
   #--------------------------------------------------------------------------
   # Public API
@@ -95,7 +100,7 @@ class NightLight:
     if self.serial is not None:
       return # Already connected
     self.serial = serial.Serial(
-      port = "/dev/ttyUSB0",
+      port = self.port,
       baudrate = 57600,
       timeout = 0.5
       )
