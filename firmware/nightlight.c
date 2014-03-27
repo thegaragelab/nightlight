@@ -110,7 +110,6 @@ int main() {
     // Update light state
     if(configRead(STATE_MOTION) >= configRead(CONFIG_TRIGGER)) {
       configWrite(STATE_LIGHT, configRead(CONFIG_LIGHT_ON));
-      light_changed = seconds();
       }
     else {
       uint16_t remaining = secondsElapsed(light_changed);
@@ -119,6 +118,7 @@ int main() {
       else
         configWrite(STATE_LIGHT, configRead(STATE_LIGHT) - remaining);
       }
+    light_changed = seconds();
     // Update LED state
     if(configRead(STATE_POWER) <= configRead(CONFIG_LOW_POWER)) {
       // Use low power values
@@ -147,8 +147,10 @@ int main() {
       pwmOut(255);
       ledState(false); // Don't turn on led if light is on
       }
-    else
+    else {
+      pwmOut(0);
       ledState(led_on);
+      }
     }
   return 0;
   }
