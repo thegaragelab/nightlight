@@ -29,16 +29,16 @@
  * that input to the current battery voltage (so readings remain consistant).
  */
 static void readSensors() {
-  uint16_t power = adcVoltage();
-  uint16_t motion = adcMotion();
+  uint8_t power = adcVoltage();
+  uint8_t motion = adcMotion();
   // Adjust motion value according to current power level
   if(power<BASE_LEVEL)
     motion = motion + (BASE_LEVEL - power);
   else if(power>BASE_LEVEL)
     motion = motion - (power - BASE_LEVEL);
   // Update sensor values
-  configWrite(STATE_POWER, ((power + configRead(STATE_POWER))>>1) & 0x00FF);
-  configWrite(STATE_MOTION, ((motion + configRead(STATE_MOTION))>>1) & 0x00FF);
+  configWrite(STATE_POWER, power);
+  configWrite(STATE_MOTION, motion);
   }
 
 /** Mask to extract command verb */
