@@ -9,12 +9,18 @@
 from time import sleep
 from nightlight import NightLight
 
+def prettyList(values):
+  """ Print the contents of a list in a more friendly format
+  """
+  return ",".join([ "%s" % str(x) for x in values ])
+
+# Main program
 if __name__ == "__main__":
   device = NightLight()
   device.connect()
   print "Configuration:"
-  print device.getConfig()
+  print prettyList(device.getConfig())
   print "State:"
   while True:
-    print device.getState()
+    print prettyList(device.getState())
     sleep(1)
