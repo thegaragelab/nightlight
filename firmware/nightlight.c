@@ -109,9 +109,14 @@ int main() {
       uartSend(processCommand(command));
     // Update light state
     if(configRead(STATE_MOTION) >= configRead(CONFIG_TRIGGER)) {
-      configWrite(STATE_LIGHT, configRead(CONFIG_LIGHT_ON));
+      configWrite(STATE_COUNT, configRead(STATE_COUNT) + 1);
+      if(configRead(STATE_COUNT)>=configRead(CONFIG_COUNT)) {
+        configWrite(STATE_LIGHT, configRead(CONFIG_LIGHT_ON));
+        configWrite(STATE_COUNT, 0);
+        }
       }
     else {
+      configWrite(STATE_COUNT, 0);
       uint16_t remaining = secondsElapsed(light_changed);
       if(remaining>configRead(STATE_LIGHT))
         configWrite(STATE_LIGHT, 0);
