@@ -24,6 +24,10 @@ union() {
           }
         }
       }
+    // Hole for the bolt
+    translate(v = [ CASE_WIDTH / 2, SHELL_SIZE + (3 * LIGHT_OUTER_RADIUS), -CASE_DEPTH / 2 ]) {
+      cylinder(r = BOLT_RADIUS, h = CASE_DEPTH, $fs = RESOLUTION);
+      }
     }
   // Separator panel to hold the PCB in place
   translate(v = [ SHELL_SIZE / 2, CASE_HEIGHT - (2 * SHELL_SIZE) - PCB_HEIGHT, SHELL_SIZE ]) {
@@ -35,12 +39,24 @@ union() {
       }
     }
   // Holder for the light
-  translate(v = [ CASE_WIDTH / 2, SHELL_SIZE + LIGHT_OUTER_RADIUS, 0 ]) {
+  translate(v = [ CASE_WIDTH / 2, SHELL_SIZE + (1.5 * LIGHT_OUTER_RADIUS), 0 ]) {
     difference() {
-      cylinder(r = LIGHT_OUTER_RADIUS, h = SHELL_SIZE + (PCB_DEPTH - LIGHT_DEPTH), $fs = RESOLUTION);
-      translate(v = [ 0, 0, SHELL_SIZE ]) {
-        cylinder(r = LIGHT_INNER_RADIUS, h = SHELL_SIZE + (PCB_DEPTH - LIGHT_DEPTH), $fs = RESOLUTION);
+      union() {
+        difference() {
+          cylinder(r = LIGHT_INNER_RADIUS, h = CASE_DEPTH - (2 * SHELL_SIZE), $fs = RESOLUTION);
+          translate(v = [ 0, 0, SHELL_SIZE ]) {
+            cylinder(r = LIGHT_INNER_RADIUS - SHELL_SIZE, h = CASE_DEPTH - (2 * SHELL_SIZE), $fs = RESOLUTION);
+            }
+          }
+        difference() {
+          cylinder(r = LIGHT_OUTER_RADIUS, h = SHELL_SIZE + (PCB_DEPTH - LIGHT_DEPTH), $fs = RESOLUTION);
+          translate(v = [ 0, 0, SHELL_SIZE ]) {
+            cylinder(r = LIGHT_INNER_RADIUS - SHELL_SIZE, h = SHELL_SIZE + (PCB_DEPTH - LIGHT_DEPTH), $fs = RESOLUTION);
+            }
+          }
         }
+    cube(size = [ SHELL_SIZE, 3 * LIGHT_OUTER_RADIUS, 3 * CASE_DEPTH ], center = true);
       }
     }
   }
+

@@ -24,6 +24,18 @@ LIGHT_OUTER_RADIUS = 29 / 2;
 LIGHT_INNER_RADIUS = 25 / 2;
 LIGHT_DEPTH        = 20;
 
+// PIR sensor
+PIR_RADIUS = 10 / 2;
+PIR_DEPTH  = 20;
+
+// LDR
+LDR_RADIUS = 5 / 2;
+
+// Bolts and nuts
+BOLT_RADIUS = 3 / 2;
+BOLT_DEPTH  = 25;
+NUT_WIDTH   = 5.2;
+
 // Case dimensions
 CASE_WIDTH   = PCB_WIDTH + (2 * SHELL_SIZE);
 CASE_HEIGHT  = PCB_HEIGHT + (4 * LIGHT_OUTER_RADIUS) + (2 * SHELL_SIZE);
