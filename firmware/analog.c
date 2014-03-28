@@ -14,7 +14,7 @@
 #define CHAN_MASK ((1 << MUX3) | (1 << MUX2) | (1 << MUX1) | (1 << MUX0))
 
 /** Number of samples to average */
-#define SAMPLE_COUNT 3
+#define SAMPLE_COUNT 4
 
 /** Initialise the ADC channels
  */
@@ -37,11 +37,13 @@ uint8_t adcRead(uint8_t channel) {
     ADCSRA |= (1 << ADSC);
     // Wait for the sample to complete
     while(!(ADCSRA&(1 << ADIF)));
-    // Grab the result and clear the completion flag
-    total = total + ADCH;
+    // Skip the first sample (allow settling)
+    if(i>0)
+      total = total + ADCH;
+    // Clear the completion flag
     ADCSRA |= (1 << ADIF);
     }
   // All done
-  return (uint8_t)((total / SAMPLE_COUNT) & 0x00FF);
+  return (uint8_t)((total / (SAMPLE_COUNT - 1)) & 0x00FF);
   }
 
