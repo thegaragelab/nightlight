@@ -23,9 +23,9 @@ if __name__ == "__main__":
   # Grab the configuration values and print them
   config = device.getConfig()
   print prettyList([
-    config[nightlight.TRIGGER],
-    config[nightlight.LOW_POWER],
-    config[nightlight.LIGHT_ON]
+    config[nightlight.CONFIG_LOW_POWER],
+    config[nightlight.CONFIG_TRIGGER],
+    config[nightlight.CONFIG_LIGHT_ON]
     ])
   # Now just monitor the state values
   while True:
