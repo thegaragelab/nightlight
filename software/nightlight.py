@@ -15,7 +15,7 @@ CHAR_START    = '!'
 CHAR_END      = '\n'
 BODY_LENGTH   = 5
 PACKET_LENGTH = BODY_LENGTH + 2
-RETRY_COUNT   = 3
+RETRY_COUNT   = 10
 
 # Configuration entries
 CONFIG_FIRMWARE    = 0

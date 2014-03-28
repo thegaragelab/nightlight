@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 #----------------------------------------------------------------------------
-# Simple configuration tool for the Night Light project
+# Monitoring tool for the Night Light device
 #----------------------------------------------------------------------------
-# 23-Mar-2014 ShaneG
+# 28-Mar-2014 ShaneG
 #
-# Initial version, command line interface only.
+# This is a simple tool that collects information from the device and emits
+# it in a comma-delimited format that can easily be used in a spreadsheet for
+# analysis.
 #----------------------------------------------------------------------------
+import nightlight
 from time import sleep
-from nightlight import NightLight
 
 def prettyList(values):
   """ Print the contents of a list in a more friendly format
@@ -16,11 +18,17 @@ def prettyList(values):
 
 # Main program
 if __name__ == "__main__":
-  device = NightLight()
+  device = nightlight.NightLight()
   device.connect()
-  print "Configuration:"
-  print prettyList(device.getConfig())
-  print "State:"
+  # Grab the configuration values and print them
+  config = device.getConfig()
+  print prettyList([
+    config[nightlight.TRIGGER],
+    config[nightlight.LOW_POWER],
+    config[nightlight.LIGHT_ON]
+    ])
+  # Now just monitor the state values
   while True:
     print prettyList(device.getState())
     sleep(1)
+
