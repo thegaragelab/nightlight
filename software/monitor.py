@@ -25,7 +25,8 @@ if __name__ == "__main__":
   print prettyList([
     config[nightlight.CONFIG_LOW_POWER],
     config[nightlight.CONFIG_TRIGGER],
-    config[nightlight.CONFIG_LIGHT_ON]
+    config[nightlight.CONFIG_LIGHT_ON],
+    config[nightlight.CONFIG_LIGHT_COUNT],
     ])
   # Now just monitor the state values
   while True:

@@ -16,7 +16,7 @@
  * incremented if any changes are made to the order or number of system
  * properties.
  */
-#define FIRMWARE 0x01
+#define FIRMWARE 0x02
 
 /** System configuration entries.
  *
@@ -26,6 +26,7 @@
 typedef enum {
   CONFIG_FIRMWARE    = 0, //! Firmware version (read only)
   CONFIG_TRIGGER,         //! Trigger value for sensing
+  CONFIG_COUNT,           //! Number of times over limit before light on
   CONFIG_LOW_POWER,       //! Low power detection level
   CONFIG_LIGHT_ON,        //! Time to keep the light on (in seconds)
   CONFIG_LIGHT_START,     //! Starting PWM value for turning on light
@@ -45,6 +46,7 @@ typedef enum {
   STATE_POWER = CONFIG_MAX, //! Current battery power reading
   STATE_MOTION,             //! Current location/brightness reading
   STATE_LIGHT,              //! Seconds remaining for light
+  STATE_COUNT,              //! Number of samples over limit
   STATE_MAX                 //! Maximum state value
   } STATE;
 

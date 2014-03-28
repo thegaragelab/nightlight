@@ -90,9 +90,10 @@ void configInit() {
     return; // Data was valid, we are done
   // Set up with suitable defaults
   g_sysinfo[CONFIG_TRIGGER]     = 205; // Trigger value for sensing
+  g_sysinfo[CONFIG_COUNT]       = 5;   // Number of samples over trigger required
   g_sysinfo[CONFIG_LIGHT_START] = 120; // Starting PWM value for turning on light
   g_sysinfo[CONFIG_LIGHT_STEP]  = 7;   // Step value for turning on/off light
-  g_sysinfo[CONFIG_LIGHT_ON]    = 30;  // Time to keep the light on (in seconds)
+  g_sysinfo[CONFIG_LIGHT_ON]    = 10;  // Time to keep the light on (in seconds)
   g_sysinfo[CONFIG_LOW_POWER]   = 173; // Low power detection level
   g_sysinfo[CONFIG_LED_ON]      = 5;   // Duration (in 1/10th sec) to keep LED on
   g_sysinfo[CONFIG_LED_OFF]     = 25;  // Duration (in 1/10th sec) to keep LED off
