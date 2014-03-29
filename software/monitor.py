@@ -26,7 +26,7 @@ if __name__ == "__main__":
     config[nightlight.CONFIG_LOW_POWER],
     config[nightlight.CONFIG_TRIGGER],
     config[nightlight.CONFIG_LIGHT_ON],
-    config[nightlight.CONFIG_LIGHT_COUNT],
+    config[nightlight.CONFIG_COUNT],
     ])
   # Now just monitor the state values
   while True:
