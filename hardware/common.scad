@@ -140,3 +140,23 @@ module roundedBox(width, height, depth, radius) {
     }
   }
 
+/** Create a hexagon.
+ *
+ * The 'size' parameter specifies the distance from the center of the
+ * hexagon to the center of one of the six straight edges. The 'depth'
+ * parameter specifies the size in the Z axis. The resulting object
+ * is centered on the origin.
+ */
+module hexagon(length, depth = 2) {
+  width = 2 * length * tan(30);
+  union() {
+    cube(size = [ length * 2, width, depth ], center = true);
+    rotate(a = [ 0, 0, 60 ]) {
+      cube(size = [ length * 2, width, depth ], center = true);
+      }
+    rotate(a = [ 0, 0, -60 ]) {
+      cube(size = [ length * 2, width, depth ], center = true);
+      }
+    }
+  }
+
