@@ -15,8 +15,8 @@ SHELL_SIZE   = 3;
 SHELL_RADIUS = 2;
 
 // Size for the board + battery pack
-PCB_WIDTH  = 52;
-PCB_HEIGHT = 54;
+PCB_WIDTH  = 53;
+PCB_HEIGHT = 55;
 PCB_DEPTH  = 28;
 
 // Light head dimensions
@@ -32,9 +32,9 @@ PIR_DEPTH  = 20;
 LDR_RADIUS = 5 / 2;
 
 // Bolts and nuts
-BOLT_RADIUS = 3 / 2;
+BOLT_RADIUS = 3.5 / 2;
 BOLT_DEPTH  = 25;
-NUT_WIDTH   = 5.2;
+NUT_WIDTH   = 6;
 
 // Case dimensions
 CASE_WIDTH   = PCB_WIDTH + (2 * SHELL_SIZE);

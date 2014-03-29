@@ -30,11 +30,11 @@ union() {
       }
     }
   // Separator panel to hold the PCB in place
-  translate(v = [ SHELL_SIZE / 2, CASE_HEIGHT - (2 * SHELL_SIZE) - PCB_HEIGHT, SHELL_SIZE ]) {
+  translate(v = [ SHELL_SIZE / 2, CASE_HEIGHT - (2 * SHELL_SIZE) - PCB_HEIGHT, 0 ]) {
     difference() {
-      cube(size = [ CASE_WIDTH - SHELL_SIZE, SHELL_SIZE, CASE_DEPTH / 2 ]);
-      translate(v = [ (CASE_WIDTH - SHELL_SIZE) / 3, -SHELL_SIZE / 2, -CASE_DEPTH / 4 ]) {
-        cube(size = [ (CASE_WIDTH  - SHELL_SIZE) / 3, SHELL_SIZE * 2, CASE_DEPTH ]);
+      cube(size = [ CASE_WIDTH - SHELL_SIZE, SHELL_SIZE, CASE_OVERLAP + CASE_DEPTH / 2 ]);
+      translate(v = [ (CASE_WIDTH - SHELL_SIZE) / 3, -SHELL_SIZE / 2, -CASE_DEPTH / 2 ]) {
+        cube(size = [ (CASE_WIDTH  - SHELL_SIZE) / 3, SHELL_SIZE * 2, 2 * CASE_DEPTH ]);
         }
       }
     }
