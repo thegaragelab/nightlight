@@ -35,6 +35,7 @@ LDR_RADIUS = 5 / 2;
 BOLT_RADIUS = 3.5 / 2;
 BOLT_DEPTH  = 25;
 NUT_WIDTH   = 6;
+NUT_DEPTH   = 2.5;
 
 // Case dimensions
 CASE_WIDTH   = PCB_WIDTH + (2 * SHELL_SIZE);
