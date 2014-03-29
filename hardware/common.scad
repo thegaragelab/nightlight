@@ -24,6 +24,11 @@ LIGHT_OUTER_RADIUS = 29 / 2;
 LIGHT_INNER_RADIUS = 25 / 2;
 LIGHT_DEPTH        = 20;
 
+// LED indicator
+LED_X      = 34; // Just take it as magic.
+LED_Y      = 47;
+LED_RADIUS = 5.5 / 2;
+
 // PIR sensor
 PIR_RADIUS = 10 / 2;
 PIR_DEPTH  = 20;
@@ -149,7 +154,7 @@ module roundedBox(width, height, depth, radius) {
  * is centered on the origin.
  */
 module hexagon(length, depth = 2) {
-  width = 2 * length * tan(30);
+  width = 2 * length / tan(60);
   union() {
     cube(size = [ length * 2, width, depth ], center = true);
     rotate(a = [ 0, 0, 60 ]) {
