@@ -18,20 +18,20 @@ compiler suite installed. It has only been tested on Ubuntu but should work
 on any modern Linux system. Windows and OS/X support is left as an exercise
 for the reader.
 
-The firmware is around 1K of compiled code and the Makefile could be easily
+The firmware is around 1.5K of compiled code and the Makefile could be easily
 modified for use on the ATtiny45 as well.
 
 ## Software
 
 This directory contains the configuration utility - it allows you to change
 various parameters for the unit through a serial connection. The utility is
-written in Python and requires the *WxPython* and *PySerial* modules. It has
+written in Python and requires *PyGTK* and *PySerial* modules. It has
 only been tested on Ubuntu systems but should work on any platform that supports
 Python 2.6 or better.
 
 ## Hardware
 
 This directory contains the schematic for the electrical components in
-[Eagle](http://www.cadsoftusa.com/eagle-pcb-design-software/product-overview/?language=en)
-format as well as the [OpenSCAD](http://www.openscad.org/) files needed to
-generate the 3D models for the printable casing.
+[Fritzing](http://fritzing.org/home/) format as well as the
+[OpenSCAD](http://www.openscad.org/) files needed to generate the 3D models for
+the printable casing.
