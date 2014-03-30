@@ -96,6 +96,11 @@ class NightLight:
   # Public API
   #--------------------------------------------------------------------------
 
+  def connected(self):
+    """ Determine if we are connected
+    """
+    return self.serial is not None
+
   def connect(self):
     """ Connect to the device
     """
